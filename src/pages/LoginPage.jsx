@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { loginService } from "../services/authServices";
+import { useState, useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const initForm = {
   user_name: "",
@@ -8,7 +8,8 @@ const initForm = {
 
 const LoginPage = () => {
   const [form, setForm] = useState(initForm);
-  const [user, setUser] = useState({});
+
+  const { user, iniciarSesion } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setForm({
@@ -20,15 +21,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const resp = await loginService(form);
-      // console.log(resp.data.data);
-      setUser(resp.data.data);
-
-      // setUser()
-    } catch (error) {
-      console.log(error.response.data);
-    }
+    await iniciarSesion(form);
 
     setForm(initForm);
   };
@@ -74,7 +67,9 @@ const LoginPage = () => {
         </article>
       </main>
       <section className="row">
-        <article className="col">{user.user_name}</article>
+        <article className="col">
+          <pre>{JSON.stringify(user, null, 2)}</pre>
+        </article>
       </section>
     </>
   );
