@@ -27,8 +27,19 @@ const AuthState = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+
+    localStorage.removeItem("token");
+  };
+
   return (
-    <AuthContext.Provider value={{ user: globalState.user, iniciarSesion }}>
+    <AuthContext.Provider
+      value={{ user: globalState.user, iniciarSesion, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -6,6 +6,12 @@ const reducer = (globalState, action) => {
         user: action.payload,
       };
 
+    case "LOGOUT":
+      return {
+        ...globalState,
+        user: action.payload,
+      };
+
     default:
       return globalState;
   }

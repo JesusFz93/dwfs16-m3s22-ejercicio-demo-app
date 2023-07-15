@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const PublicNavbar = () => {
+  const { auth, logout } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container">
@@ -55,26 +58,42 @@ const PublicNavbar = () => {
                 Cuenta
               </a>
               <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "dropdown-item active" : "dropdown-item"
-                    }
-                    to="/login"
-                  >
-                    Login
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "dropdown-item active" : "dropdown-item"
-                    }
-                    to="/register"
-                  >
-                    Registro
-                  </NavLink>
-                </li>
+                {auth?.user_name ? (
+                  <>
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        type="button"
+                        onClick={logout}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "dropdown-item active" : "dropdown-item"
+                        }
+                        to="/login"
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "dropdown-item active" : "dropdown-item"
+                        }
+                        to="/register"
+                      >
+                        Registro
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
             </li>
           </ul>
