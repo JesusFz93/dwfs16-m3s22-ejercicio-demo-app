@@ -8,6 +8,7 @@ const initForm = {
 
 const LoginPage = () => {
   const [form, setForm] = useState(initForm);
+  const [user, setUser] = useState({});
 
   const handleChange = (e) => {
     setForm({
@@ -21,7 +22,10 @@ const LoginPage = () => {
 
     try {
       const resp = await loginService(form);
-      console.log(resp.data);
+      // console.log(resp.data.data);
+      setUser(resp.data.data);
+
+      // setUser()
     } catch (error) {
       console.log(error.response.data);
     }
@@ -69,6 +73,9 @@ const LoginPage = () => {
           </form>
         </article>
       </main>
+      <section className="row">
+        <article className="col">{user.user_name}</article>
+      </section>
     </>
   );
 };
