@@ -3,7 +3,10 @@ import ProductContext from "./ProductContext";
 import productReducer from "./ProductReducer";
 import PropTypes from "prop-types";
 
-import { getProductsService } from "../services/productServices";
+import {
+  getProductsService,
+  getProductService,
+} from "../services/productServices";
 
 const initialState = {
   products: [],
@@ -21,7 +24,14 @@ const ProductState = ({ children }) => {
       payload: response.data.data,
     });
   };
-  const getProduct = () => {};
+  const getProduct = async (id) => {
+    const response = await getProductService(id);
+
+    dispatch({
+      type: "OBTENER_PRODUCTO",
+      payload: response.data.data,
+    });
+  };
 
   return (
     <ProductContext.Provider
