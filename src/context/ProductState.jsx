@@ -2,6 +2,7 @@ import { useReducer, useCallback } from "react";
 import ProductContext from "./ProductContext";
 import productReducer from "./ProductReducer";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 import {
   getProductsService,
@@ -59,6 +60,13 @@ const ProductState = ({ children }) => {
     dispatch({
       type: "AGREGAR_PRODUCTO",
       payload: response.data.data,
+    });
+
+    Swal.fire({
+      icon: "success",
+      title: "Producto agregado al carrito",
+      showConfirmButton: false,
+      timer: 2000,
     });
   };
 
