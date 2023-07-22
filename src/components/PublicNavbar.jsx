@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import ProductContext from "../context/ProductContext";
 
 const PublicNavbar = () => {
   const { auth, logout } = useContext(AuthContext);
+  const { cart } = useContext(ProductContext);
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container">
@@ -54,6 +56,17 @@ const PublicNavbar = () => {
                 to="/products"
               >
                 Products
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                aria-current="page"
+                to="/cart"
+              >
+                <i className="bi bi-cart-plus" /> {cart.length}
               </NavLink>
             </li>
           </ul>

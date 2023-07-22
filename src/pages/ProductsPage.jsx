@@ -3,10 +3,11 @@ import ProductContext from "../context/ProductContext";
 import { Link } from "react-router-dom";
 
 const ProductsPage = () => {
-  const { getProducts, products } = useContext(ProductContext);
+  const { getProducts, products, addProduct } = useContext(ProductContext);
 
   const handleAddProduct = (id) => {
-    console.log(id);
+    // console.log(id);
+    addProduct(id);
   };
 
   useEffect(() => {

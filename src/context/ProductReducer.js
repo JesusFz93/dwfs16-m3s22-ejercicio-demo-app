@@ -12,6 +12,12 @@ const reducer = (globalState, action) => {
         product: action.payload,
       };
 
+    case "AGREGAR_PRODUCTO":
+      return {
+        ...globalState,
+        cart: [...globalState.cart, action.payload],
+      };
+
     default:
       return globalState;
   }
