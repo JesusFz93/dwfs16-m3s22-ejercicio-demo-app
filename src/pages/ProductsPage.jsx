@@ -1,27 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
 import { Link } from "react-router-dom";
 
 const ProductsPage = () => {
   const { getProducts, products } = useContext(ProductContext);
 
-  const handleClick = async () => {
-    await getProducts();
-  };
-
   const handleAddProduct = (id) => {
     console.log(id);
   };
 
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
   return (
     <>
-      <main className="row">
-        <article className="col">
-          <button type="button" onClick={handleClick}>
-            Obtener productos
-          </button>
-        </article>
-      </main>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {products.map((product) => (
           <div key={product.id} className="col">

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 import ProductContext from "./ProductContext";
 import productReducer from "./ProductReducer";
 import PropTypes from "prop-types";
@@ -16,22 +16,41 @@ const initialState = {
 const ProductState = ({ children }) => {
   const [globalState, dispatch] = useReducer(productReducer, initialState);
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     const response = await getProductsService();
 
     dispatch({
       type: "OBTENER_PRODUCTOS",
       payload: response.data.data,
     });
-  };
-  const getProduct = async (id) => {
+  }, []);
+
+  // const getProducts = async () => {
+  //   const response = await getProductsService();
+
+  //   dispatch({
+  //     type: "OBTENER_PRODUCTOS",
+  //     payload: response.data.data,
+  //   });
+  // };
+
+  // const getProduct = async (id) => {
+  //   const response = await getProductService(id);
+
+  //   dispatch({
+  //     type: "OBTENER_PRODUCTO",
+  //     payload: response.data.data,
+  //   });
+  // };
+
+  const getProduct = useCallback(async (id) => {
     const response = await getProductService(id);
 
     dispatch({
       type: "OBTENER_PRODUCTO",
       payload: response.data.data,
     });
-  };
+  }, []);
 
   return (
     <ProductContext.Provider

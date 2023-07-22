@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
 import { useParams } from "react-router-dom";
 
@@ -6,19 +6,12 @@ const ProductPage = () => {
   const { getProduct, product } = useContext(ProductContext);
   const { id } = useParams();
 
-  const handleClick = async () => {
-    await getProduct(id);
-  };
+  useEffect(() => {
+    getProduct(id);
+  }, [getProduct, id]);
 
   return (
     <>
-      <main className="row">
-        <article className="col">
-          <button type="button" onClick={handleClick}>
-            Obtener producto
-          </button>
-        </article>
-      </main>
       <section className="row">
         <article className="col">
           {product && (
