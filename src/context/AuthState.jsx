@@ -1,9 +1,13 @@
-import { useReducer } from "react";
+import { useReducer, useCallback } from "react";
 import AuthContext from "./AuthContext";
 import authReducer from "./AuthReducer";
 import PropTypes from "prop-types";
 
-import { loginService, registerService } from "../services/authServices";
+import {
+  loginService,
+  registerService,
+  renewTokenService,
+} from "../services/authServices";
 
 const initialState = {
   user: null,
@@ -42,6 +46,21 @@ const AuthState = ({ children }) => {
     }
   };
 
+  const renewToken = useCallback(async () => {
+    try {
+      const resp = await renewTokenService();
+
+      dispatch({
+        type: "INICIAR_SESION",
+        payload: resp.data.data,
+      });
+
+      localStorage.setItem("token", resp.data.token);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const logout = () => {
     dispatch({
       type: "LOGOUT",
@@ -58,6 +77,7 @@ const AuthState = ({ children }) => {
         iniciarSesion,
         logout,
         registrarUsuario,
+        renewToken,
       }}
     >
       {children}

@@ -13,4 +13,13 @@ const registerService = async (form) => {
   return resp;
 };
 
-export { loginService, registerService };
+const renewTokenService = async () => {
+  const resp = await axios.get(`${URL_ROOT}/renew`, {
+    headers: {
+      "x-token": localStorage.getItem("token"),
+    },
+  });
+  return resp;
+};
+
+export { loginService, registerService, renewTokenService };

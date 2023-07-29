@@ -15,7 +15,17 @@ import ProductsPage from "../pages/ProductsPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/AuthContext";
+
 const AppRouter = () => {
+  const { renewToken } = useContext(AuthContext);
+
+  useEffect(() => {
+    renewToken();
+    console.log("sasddss");
+  }, [renewToken]);
+
   return (
     <Router>
       <PublicNavbar />
