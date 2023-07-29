@@ -55,26 +55,45 @@ const ProductState = ({ children }) => {
   }, []);
 
   const addProduct = async (id) => {
-    const response = await getProductService(id);
+    try {
+      const response = await getProductService(id);
 
-    dispatch({
-      type: "AGREGAR_PRODUCTO",
-      payload: response.data.data,
-    });
+      dispatch({
+        type: "AGREGAR_PRODUCTO",
+        payload: response.data.data,
+      });
 
-    Swal.fire({
-      icon: "success",
-      title: "Producto agregado al carrito",
-      showConfirmButton: false,
-      timer: 2000,
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Producto agregado al carrito",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    } catch (error) {
+      //console.log(error)
+      Swal.fire({
+        icon: "error",
+        title: "Error en la peticion",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
 
   const deleteCartProduct = (id) => {
-    dispatch({
-      type: "ELIMINAR_PRODUCTO",
-      payload: id,
-    });
+    try {
+      dispatch({
+        type: "ELIMINAR_PRODUCTO",
+        payload: id,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error al eliminar el producto del carrito",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
 
   return (
