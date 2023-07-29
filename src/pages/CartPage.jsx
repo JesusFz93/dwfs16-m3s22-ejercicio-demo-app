@@ -55,13 +55,21 @@ const CartPage = () => {
       </main>
       <section className="row pb-5">
         <article className="col">
-          <p className="fs-1">Total</p>
-          <p className="fs-2">{ammount}</p>
-          <PaypalCheckoutButton
-            currency="MXN"
-            amount={ammount}
-            showSpinner={false}
-          />
+          {cart.length > 0 ? (
+            <>
+              <p className="fs-1">Total</p>
+              <p className="fs-2">{ammount}</p>
+              <PaypalCheckoutButton
+                currency="MXN"
+                amount={ammount}
+                showSpinner={false}
+              />
+            </>
+          ) : (
+            <>
+              <p className="fs-1">No hay productos en el carrito</p>
+            </>
+          )}
         </article>
       </section>
     </>
