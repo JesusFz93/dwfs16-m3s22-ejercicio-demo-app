@@ -5,10 +5,8 @@ import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { cart, deleteCartProduct, user } = useContext(
-    ProductContext,
-    AuthContext
-  );
+  const { cart, deleteCartProduct } = useContext(ProductContext);
+  const { user } = useContext(AuthContext);
 
   const [ammount, setAmmount] = useState(0);
 
@@ -63,10 +61,10 @@ const CartPage = () => {
         <article className="col">
           {cart.length > 0 ? (
             <>
-              {user?.user_name ? (
+              <p className="fs-1">Total</p>
+              <p className="fs-2">{ammount}</p>
+              {user.user_name ? (
                 <>
-                  <p className="fs-1">Total</p>
-                  <p className="fs-2">{ammount}</p>
                   <PaypalCheckoutButton
                     currency="MXN"
                     amount={ammount}
