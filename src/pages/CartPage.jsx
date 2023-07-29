@@ -2,11 +2,12 @@ import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 
 const CartPage = () => {
-  const { cart } = useContext(ProductContext);
+  const { cart, deleteCartProduct } = useContext(ProductContext);
 
   const handleDeleteProduct = (id) => {
-    console.log(id);
+    deleteCartProduct(id);
   };
+
   return (
     <main className="row">
       <article className="col">

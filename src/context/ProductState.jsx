@@ -70,6 +70,13 @@ const ProductState = ({ children }) => {
     });
   };
 
+  const deleteCartProduct = (id) => {
+    dispatch({
+      type: "ELIMINAR_PRODUCTO",
+      payload: id,
+    });
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -79,6 +86,7 @@ const ProductState = ({ children }) => {
         getProduct,
         addProduct,
         cart: globalState.cart,
+        deleteCartProduct,
       }}
     >
       {children}
