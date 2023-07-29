@@ -18,6 +18,7 @@ import ProfilePage from "../pages/ProfilePage";
 
 import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
   const { renewToken, user } = useContext(AuthContext);
@@ -51,6 +52,7 @@ const AppRouter = () => {
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 };
