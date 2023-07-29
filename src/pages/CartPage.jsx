@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
+import PaypalCheckoutButton from "../components/PayPalButton";
 
 const CartPage = () => {
   const { cart, deleteCartProduct } = useContext(ProductContext);
@@ -56,6 +57,11 @@ const CartPage = () => {
         <article className="col">
           <p className="fs-1">Total</p>
           <p className="fs-2">{ammount}</p>
+          <PaypalCheckoutButton
+            currency="MXN"
+            amount={ammount}
+            showSpinner={false}
+          />
         </article>
       </section>
     </>
