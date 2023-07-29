@@ -14,16 +14,16 @@ import RegisterPage from "../pages/RegisterPage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
+import ProfilePage from "../pages/ProfilePage";
 
 import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 
 const AppRouter = () => {
-  const { renewToken } = useContext(AuthContext);
+  const { renewToken, user } = useContext(AuthContext);
 
   useEffect(() => {
     renewToken();
-    console.log("sasddss");
   }, [renewToken]);
 
   return (
@@ -33,11 +33,21 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
+
+          {user.user_name ? (
+            <>
+              <Route path="/profile" element={<ProfilePage />} />
+            </>
+          ) : (
+            <>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </>
+          )}
+
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

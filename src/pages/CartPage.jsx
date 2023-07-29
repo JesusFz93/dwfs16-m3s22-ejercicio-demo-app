@@ -1,9 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
 import PaypalCheckoutButton from "../components/PayPalButton";
+import AuthContext from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { cart, deleteCartProduct } = useContext(ProductContext);
+  const { cart, deleteCartProduct, user } = useContext(
+    ProductContext,
+    AuthContext
+  );
+
   const [ammount, setAmmount] = useState(0);
 
   const handleDeleteProduct = (id) => {
@@ -57,13 +63,23 @@ const CartPage = () => {
         <article className="col">
           {cart.length > 0 ? (
             <>
-              <p className="fs-1">Total</p>
-              <p className="fs-2">{ammount}</p>
-              <PaypalCheckoutButton
-                currency="MXN"
-                amount={ammount}
-                showSpinner={false}
-              />
+              {user?.user_name ? (
+                <>
+                  <p className="fs-1">Total</p>
+                  <p className="fs-2">{ammount}</p>
+                  <PaypalCheckoutButton
+                    currency="MXN"
+                    amount={ammount}
+                    showSpinner={false}
+                  />
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="btn btn-success">
+                    Iniciar sesion
+                  </Link>
+                </>
+              )}
             </>
           ) : (
             <>

@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 import ProductContext from "../context/ProductContext";
 
 const PublicNavbar = () => {
-  const { auth, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const { cart } = useContext(ProductContext);
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -79,11 +79,21 @@ const PublicNavbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Cuenta
+                {user.user_name ? user.user_name : "Cuenta"}
               </a>
               <ul className="dropdown-menu dropdown-menu-end">
-                {auth?.user_name ? (
+                {user.user_name ? (
                   <>
+                    <li>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "dropdown-item active" : "dropdown-item"
+                        }
+                        to="/profile"
+                      >
+                        Perfil
+                      </NavLink>
+                    </li>
                     <li>
                       <button
                         className="dropdown-item"

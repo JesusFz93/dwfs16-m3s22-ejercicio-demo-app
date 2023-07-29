@@ -10,7 +10,7 @@ import {
 } from "../services/authServices";
 
 const initialState = {
-  user: null,
+  user: {},
 };
 
 const AuthState = ({ children }) => {
@@ -64,7 +64,7 @@ const AuthState = ({ children }) => {
   const logout = () => {
     dispatch({
       type: "LOGOUT",
-      payload: null,
+      payload: {},
     });
 
     localStorage.removeItem("token");
