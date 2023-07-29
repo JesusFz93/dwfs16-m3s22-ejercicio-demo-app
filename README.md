@@ -34,7 +34,7 @@
 
 Enlaces de interes para el proyecto.
 
-- Repositorio BE: https://github.com/JesusFz93/ucamp-05-ecommerce
-- Repositorio FE: https://github.com/JesusFz93/ucamp-05-ecommerce-frontend
+- Repositorio BE: https://github.com/JesusFz93/dwfs16-m3s21-ejercicio-auth
+- Repositorio FE: https://github.com/JesusFz93/dwfs16-m3s22-ejercicio-demo-app
 
-- Aplicacion publicada: http://ucamp-05-ecommerce-frontend.herokuapp.com
+- Aplicacion publicada: https://magnificent-beignet-b54199.netlify.app/
