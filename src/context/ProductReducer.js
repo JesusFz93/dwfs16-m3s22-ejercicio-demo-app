@@ -30,6 +30,12 @@ const reducer = (globalState, action) => {
         ),
       };
 
+    case "VACIAR_CARRITO":
+      return {
+        ...globalState,
+        cart: [],
+      };
+
     default:
       return globalState;
   }
